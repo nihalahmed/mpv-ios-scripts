@@ -1,4 +1,6 @@
-lib/
+lib-ios/
+lib-tv/
 downloads/
 src/
-scratch/
+scratch-ios/
+scratch-tv/
