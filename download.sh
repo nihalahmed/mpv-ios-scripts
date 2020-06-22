@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Change to preferred versions
-MPV_VERSION="0.31.0"
+MPV_VERSION="0.32.0"
 FFMPEG_VERSION="4.1"
 LIBASS_VERSION="0.14.0"
 FREETYPE_VERSION="2.10.0"
