@@ -15,17 +15,23 @@ Currently used to help build [Outplayer](http://get.outplayer.app) on iOS.
 
 Tested with:
 
-* macOS 10.14.6
-* Xcode 10.3
+* macOS 10.15.4
+* Xcode 11.3.1
 
 ## Usage
 
 1. Run `./download.sh` to download and unarchive the projects' source
-2. Run `./build.sh -e ENVIRONMENT`, where environment is one of:
+2. Run `./build-ios.sh -e ENVIRONMENT`, where environment is one of:
 
-`development`: builds arm64 and x86_64 fat static libaries, and builds mpv with debug symbols and no optimization.
+`development`: builds x86_64 static libaries, and builds mpv with debug symbols and no optimization.
 
-`distribution`: builds only arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
+`distribution`: builds x86_64, armv7(iOS) and arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
+
+3. Run `./lipo-ios.sh` to create fat static libraries from the development and distribution architectures.
+
+To build for tvOS, run `./build-tv.sh` and `./lipo-tv.sh` instead.
+
+Alternatively, run `./build.sh` to build and create fat static libraries for iOS and tvOS from the development and distribution architectures.
 
 ## References
 
