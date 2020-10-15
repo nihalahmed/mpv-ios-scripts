@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 LIBRARIES="libuchardet libfribidi libfreetype libharfbuzz libass ffmpeg libmpv"
+OPENSSL="$(pwd)/openssl-tv"
 
 export PKG_CONFIG_PATH
 export LDFLAGS
@@ -69,6 +70,9 @@ for ARCH in $ARCHS; do
         LDFLAGS="$ALDFLAGS -fembed-bitcode -Os"
     fi
     CXXFLAGS="$CFLAGS"
+
+    CFLAGS="$CFLAGS -I$OPENSSL/include"
+    LDFLAGS="$LDFLAGS -L$OPENSSL/lib"
 
     mkdir -p $SCRATCH
 

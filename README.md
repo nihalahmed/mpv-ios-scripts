@@ -20,14 +20,16 @@ Tested with:
 
 ## Usage
 
-1. Run `./download.sh` to download and unarchive the projects' source
-2. Run `./build-ios.sh -e ENVIRONMENT`, where environment is one of:
+1. [Build OpenSSL](https://github.com/x2on/OpenSSL-for-iPhone/tree/OpenSSL-1.0.2l) for iOS and tvOS
+2. Copy built OpenSSL libraries to `./openssl-ios` and `./openssl-tv`
+3. Run `./download.sh` to download and unarchive the projects' source
+4. Run `./build-ios.sh -e ENVIRONMENT`, where environment is one of:
 
 `development`: builds x86_64 static libaries, and builds mpv with debug symbols and no optimization.
 
 `distribution`: builds x86_64, armv7(iOS) and arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
 
-3. Run `./lipo-ios.sh` to create fat static libraries from the development and distribution architectures.
+5. Run `./lipo-ios.sh` to create fat static libraries from the development and distribution architectures.
 
 To build for tvOS, run `./build-tv.sh` and `./lipo-tv.sh` instead.
 

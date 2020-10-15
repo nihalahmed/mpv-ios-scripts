@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 LIBRARIES="libuchardet libfribidi libfreetype libharfbuzz libass ffmpeg libmpv libavcodec libavdevice libavfilter libavformat libavutil libswresample libswscale"
+OPENSSL="$(pwd)/openssl-ios"
 ROOT="$(pwd)"
 SCRATCH="$ROOT/scratch-ios"
 LIB="$ROOT/lib-ios"
@@ -15,3 +16,6 @@ for LIBRARY in $LIBRARIES; do
         rm -f $LIB/$LIBRARY.a
     fi
 done
+
+cp $OPENSSL/lib/libcrypto.a $LIB/libcrypto.a
+cp $OPENSSL/lib/libssl.a $LIB/libssl.a
