@@ -13,7 +13,7 @@ FFMPEG_OPTIONS="${COMMON_OPTIONS%% *} \
 		--enable-openssl \
 		--disable-indev=avfoundation"
 
-if [[ "$ARCH" = "armv7" ]]; then
+if [[ "$ARCH" = "armv7" ]] || [[ "$ARCH" = "x86_64" ]]; then
 	FFMPEG_OPTIONS="${FFMPEG_OPTIONS} \
 		--disable-asm"
 fi
