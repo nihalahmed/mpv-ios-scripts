@@ -27,7 +27,7 @@ Tested with:
 
 `development`: builds x86_64 static libaries, and builds mpv with debug symbols and no optimization.
 
-`distribution`: builds x86_64, armv7(iOS) and arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
+`distribution`: builds x86_64 and arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
 
 5. Run `./lipo-ios.sh` to create fat static libraries from the development and distribution architectures.
 

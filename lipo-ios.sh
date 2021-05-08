@@ -9,7 +9,7 @@ mkdir -p $LIB
 
 for LIBRARY in $LIBRARIES; do
     if [[ "$LIBRARY" != "ffmpeg" ]]; then
-        lipo -create $SCRATCH/arm64/lib/$LIBRARY.a -create $SCRATCH/armv7/lib/$LIBRARY.a $SCRATCH/x86_64/lib/$LIBRARY.a -o $LIB/$LIBRARY.a
+        lipo -create $SCRATCH/arm64/lib/$LIBRARY.a $SCRATCH/x86_64/lib/$LIBRARY.a -o $LIB/$LIBRARY.a
     fi
     if [[ "$LIBRARY" = "libavcodec" ]]; then
         zip -r -j $LIB/$LIBRARY.a.zip $LIB/$LIBRARY.a

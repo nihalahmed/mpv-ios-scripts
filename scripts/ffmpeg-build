@@ -13,7 +13,7 @@ FFMPEG_OPTIONS="${COMMON_OPTIONS%% *} \
 		--enable-openssl \
 		--disable-indev=avfoundation"
 
-if [[ "$ARCH" = "armv7" ]] || [[ "$ARCH" = "x86_64" ]]; then
+if [[ "$ARCH" = "x86_64" ]]; then
 	FFMPEG_OPTIONS="${FFMPEG_OPTIONS} \
 		--disable-asm"
 fi
@@ -23,17 +23,15 @@ if [[ ! `which gas-preprocessor.pl` ]]; then
 		&& chmod +x /usr/local/bin/gas-preprocessor.pl
 fi
 
-if [[ "$ARCH" = "arm64" ]] || [[ "$ARCH" = "armv7" ]]; then
+if [[ "$ARCH" = "arm64" ]]; then
 	EXPORT="GASPP_FIX_XCODE5=1"
 fi
 
 XCRUN_SDK=`echo $PLATFORM | tr '[:upper:]' '[:lower:]'`
 CC="xcrun -sdk $XCRUN_SDK clang"
 
-if [[ "$ARCH" = "armv7" ]]; then
+if [[ "$ARCH" = "arm64" ]]; then
 	AS="gas-preprocessor.pl -arch aarch64 -- $CC"
-elif [[ "$ARCH" = "armv7" ]]; then
-	AS="gas-preprocessor.pl -arch armv7 -- $CC"
 else
 	AS="gas-preprocessor.pl -- $CC"
 fi

@@ -27,7 +27,7 @@ done
 export PATH="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/:$PATH"
 
 if [[ "$ENVIRONMENT" = "distribution" ]]; then
-    ARCHS="arm64 armv7"
+    ARCHS="arm64"
 elif [[ "$ENVIRONMENT" = "development" ]]; then
     ARCHS="x86_64"
 elif [[ "$ENVIRONMENT" = "" ]]; then
@@ -51,15 +51,8 @@ for ARCH in $ARCHS; do
 		export SDKPATH="$(xcodebuild -sdk iphoneos -version Path)"
 		ACFLAGS="-arch $ARCH -isysroot $SDKPATH -mios-version-min=$DEPLOYMENT_TARGET"
 		ALDFLAGS="-arch $ARCH -isysroot $SDKPATH -Wl,-ios_version_min,$DEPLOYMENT_TARGET -lbz2"
-	elif [[ $ARCH = "armv7" ]]; then
-        DEPLOYMENT_TARGET="9.0"
-        HOSTFLAG="armv7"
-        PLATFORM="iPhoneOS"
-		export SDKPATH="$(xcodebuild -sdk iphoneos -version Path)"
-		ACFLAGS="-arch $ARCH -isysroot $SDKPATH -mios-version-min=$DEPLOYMENT_TARGET"
-		ALDFLAGS="-arch $ARCH -isysroot $SDKPATH -Wl,-ios_version_min,$DEPLOYMENT_TARGET -lbz2"
 	elif [[ $ARCH = "x86_64" ]]; then
-        DEPLOYMENT_TARGET="9.0"
+        DEPLOYMENT_TARGET="11.0"
         HOSTFLAG="x86_64"
         PLATFORM="iPhoneSimulator"
 		export SDKPATH="$(xcodebuild -sdk iphonesimulator -version Path)"

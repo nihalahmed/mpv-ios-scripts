@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 # Change to preferred versions
-MPV_VERSION="0.32.0"
-FFMPEG_VERSION="4.2"
+MPV_VERSION="0.33.1"
+FFMPEG_VERSION="4.3.1"
 LIBASS_VERSION="0.14.0"
 FREETYPE_VERSION="2.10.0"
 HARFBUZZ_VERSION="2.6.4"
@@ -29,6 +29,8 @@ for URL in $UCHARDET_URL $FREETYPE_URL $HARFBUZZ_URL $FRIBIDI_URL $LIBASS_URL $F
 done
 
 sed -i "" "s/typedef ptrdiff_t GLsizeiptr;/typedef intptr_t GLsizeiptr;/" ./src/mpv-$MPV_VERSION/video/out/opengl/gl_headers.h;
+
+patch -p0 < mpv-patch.diff
 
 echo "\033[1;32mDownloaded: \033[0m\n mpv: $MPV_VERSION \
                             \n FFmpeg: $FFMPEG_VERSION \
