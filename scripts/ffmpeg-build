@@ -8,6 +8,7 @@ FFMPEG_OPTIONS="${COMMON_OPTIONS%% *} \
 		--disable-debug \
 		--disable-programs \
 		--disable-doc \
+		--disable-audiotoolbox \
 		--enable-pic \
 		--enable-shared \
 		--enable-openssl \
