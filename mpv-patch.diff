@@ -1,8 +1,8 @@
---- src/mpv-0.33.1/bootstrap.py	2021-04-05 12:45:41.000000000 -0400
-+++ src/mpv-0.33.1/bootstrap.py	2021-05-08 11:21:44.000000000 -0400
+--- src/mpv-0.34.0/bootstrap.py
++++ src/mpv-0.34.0/bootstrap.py
 @@ -5,10 +5,10 @@
- from __future__ import print_function
  import os, sys, stat, hashlib, subprocess
+ from urllib.request import urlopen, URLError
  
 -WAFRELEASE = "waf-2.0.20"
 +WAFRELEASE = "waf-2.0.9"
@@ -13,24 +13,24 @@
  
  if os.path.exists("waf"):
      wafver = subprocess.check_output([sys.executable, './waf', '--version']).decode()
---- src/mpv-0.33.1/wscript	2021-05-08 11:09:56.000000000 -0400
-+++ src/mpv-0.33.1/wscript	2021-05-08 10:36:14.000000000 -0400
-@@ -242,6 +242,12 @@
+--- src/mpv-0.34.0/wscript
++++ src/mpv-0.34.0/wscript
+@@ -245,6 +245,12 @@ iconv support use --disable-iconv.",
+         'desc': 'w32/dos paths',
          'deps': 'os-win32 || os-cygwin',
          'func': check_true
-     }, {
++    }, {
 +        'name': 'posix-spawn',
 +        'desc': 'spawnp()/kill() POSIX support',
 +        'func': check_statement(['spawn.h', 'signal.h'],
 +            'posix_spawnp(0,0,0,0,0,0); kill(0,0)'),
 +        'deps': '!mingw && !tvos',
-+    }, {
+     }, {
          'name': 'glob-posix',
          'desc': 'glob() POSIX support',
-         'deps': '!(os-win32 || os-cygwin)',
---- src/mpv-0.33.1/wscript_build.py	2021-05-08 11:10:19.000000000 -0400
-+++ src/mpv-0.33.1/wscript_build.py	2021-05-08 10:35:41.000000000 -0400
-@@ -209,7 +209,7 @@
+--- src/mpv-0.34.0/wscript_build.py
++++ src/mpv-0.34.0/wscript_build.py
+@@ -209,7 +209,7 @@ def build(ctx):
      ])
  
      subprocess_c = ctx.pick_first_matching_dep([
