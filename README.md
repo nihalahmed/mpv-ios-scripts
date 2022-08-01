@@ -15,25 +15,23 @@ Currently used to help build [Outplayer](http://get.outplayer.app) on iOS.
 
 Tested with:
 
-* macOS 10.15.4
-* Xcode 11.3.1
+* macOS 12.5
+* Xcode 13.4.1
 
 ## Usage
 
-1. [Build OpenSSL](https://github.com/x2on/OpenSSL-for-iPhone/tree/OpenSSL-1.0.2l) for iOS and tvOS
-2. Copy built OpenSSL libraries to `./openssl-ios` and `./openssl-tv`
+1. [Build OpenSSL](https://github.com/x2on/OpenSSL-for-iPhone/tree/dc64c470b5e1aeec5d66d861e6dc164478c9289b) for iOS and tvOS
+2. Copy built OpenSSL libraries to `./openssl`
 3. Run `./download.sh` to download and unarchive the projects' source
-4. Run `./build-ios.sh -e ENVIRONMENT`, where environment is one of:
+4. Run `./compile.sh -p PLATFORM -e ENVIRONMENT`, where platform is one of `ios`, `tv` and environment is one of:
 
-`development`: builds x86_64 static libaries, and builds mpv with debug symbols and no optimization.
+`development`: builds x86_64 and arm64 static libaries, and builds mpv with debug symbols and no optimization.
 
-`distribution`: builds x86_64 and arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
+`distribution`: builds arm64 static libraries, adds bitcode, and adds `-Os` to optimize for size and speed.
 
-5. Run `./lipo-ios.sh` to create fat static libraries from the development and distribution architectures.
+5. Run `./xcframework.sh` to create a framework from the development and distribution architectures.
 
-To build for tvOS, run `./build-tv.sh` and `./lipo-tv.sh` instead.
-
-Alternatively, run `./build.sh` to build and create fat static libraries for iOS and tvOS from the development and distribution architectures.
+Alternatively, run `./build.sh` to build and create a framework for iOS and tvOS from the development and distribution architectures.
 
 ## References
 

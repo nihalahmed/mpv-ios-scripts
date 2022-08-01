@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-./build-ios.sh -e development && ./build-ios.sh -e distribution && ./lipo-ios.sh && ./build-tv.sh -e development && ./build-tv.sh -e distribution && ./lipo-tv.sh
+./compile.sh -p ios -e development && ./compile.sh -p ios -e distribution && ./compile.sh -p tv -e development && ./compile.sh -p tv -e distribution && ./xcframework.sh
