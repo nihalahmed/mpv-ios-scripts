@@ -6,36 +6,31 @@ ROOT="$(pwd)"
 LIB="$ROOT/lib"
 mkdir -p $LIB
 
-for PLATFORM in $PLATFORMS; do
-    SCRATCH="$ROOT/scratch-$PLATFORM"
-    ENVIRONMENTS=""
+for LIBRARY in $LIBRARIES; do
+    FRAMEWORKS=""
+    for PLATFORM in $PLATFORMS; do
+        SCRATCH="$ROOT/scratch-$PLATFORM"
 
-    if [ -d "$SCRATCH/x86_64-development" ] && [ -d "$SCRATCH/arm64-development" ]; then
-        ENVIRONMENTS="$ENVIRONMENTS development"
-        mkdir -p $SCRATCH/development
-        for LIBRARY in $LIBRARIES; do
-            lipo -create $SCRATCH/x86_64-development/lib/$LIBRARY.a $SCRATCH/arm64-development/lib/$LIBRARY.a -o $SCRATCH/development/$LIBRARY
-        done
-    fi
+        if [ -d "$SCRATCH/x86_64-development" ] && [ -d "$SCRATCH/arm64-development" ]; then
+            ENVIRONMENTS="$ENVIRONMENTS development"
+            mkdir -p $SCRATCH/development/$LIBRARY.framework
+            lipo -create $SCRATCH/x86_64-development/lib/$LIBRARY.a $SCRATCH/arm64-development/lib/$LIBRARY.a -o $SCRATCH/development/$LIBRARY.framework/$LIBRARY
+        fi
 
-    if [[ -d "$SCRATCH/arm64-distribution" ]]; then
-        ENVIRONMENTS="$ENVIRONMENTS distribution"
-        mkdir -p $SCRATCH/distribution
-        for LIBRARY in $LIBRARIES; do
-            cp $SCRATCH/arm64-distribution/lib/$LIBRARY.a $SCRATCH/distribution/$LIBRARY
-        done
-    fi
+        if [[ -d "$SCRATCH/arm64-distribution" ]]; then
+            ENVIRONMENTS="$ENVIRONMENTS distribution"
+            mkdir -p $SCRATCH/distribution/$LIBRARY.framework
+            cp $SCRATCH/arm64-distribution/lib/$LIBRARY.a $SCRATCH/distribution/$LIBRARY.framework/$LIBRARY
+        fi
 
-    for ENVIRONMENT in $ENVIRONMENTS; do
-        LIBS=""
-        for LIBRARY in $LIBRARIES; do
-            LIBS="$LIBS $SCRATCH/$ENVIRONMENT/$LIBRARY"
+        for ENVIRONMENT in $ENVIRONMENTS; do
+            cp -a $ROOT/framework-meta/Info.plist $SCRATCH/$ENVIRONMENT/$LIBRARY.framework/Info.plist
+            sed -i "" "s/{NAME}/$LIBRARY/g" $SCRATCH/$ENVIRONMENT/$LIBRARY.framework/Info.plist
+            if [[ "$LIBRARY" = "libmpv" ]]; then
+                cp -a $ROOT/framework-meta/libmpv/. $SCRATCH/$ENVIRONMENT/$LIBRARY.framework/
+            fi
+            FRAMEWORKS="$FRAMEWORKS -framework $SCRATCH/$ENVIRONMENT/$LIBRARY.framework"
         done
-        mkdir -p $SCRATCH/$ENVIRONMENT-combined/libmpv.framework
-        libtool -static -o $SCRATCH/$ENVIRONMENT-combined/libmpv.framework/libmpv $LIBS
-        cp -a $ROOT/framework-meta/. $SCRATCH/$ENVIRONMENT-combined/libmpv.framework/
-        FRAMEWORKS="$FRAMEWORKS -framework $SCRATCH/$ENVIRONMENT-combined/libmpv.framework"
     done
+    xcodebuild -create-xcframework $FRAMEWORKS -output $LIB/$LIBRARY.xcframework
 done
-
-xcodebuild -create-xcframework $FRAMEWORKS -output $LIB/libmpv.xcframework
