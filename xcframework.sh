@@ -8,6 +8,7 @@ mkdir -p $LIB
 
 for LIBRARY in $LIBRARIES; do
     FRAMEWORKS=""
+    ENVIRONMENTS=""
     for PLATFORM in $PLATFORMS; do
         SCRATCH="$ROOT/scratch-$PLATFORM"
 
