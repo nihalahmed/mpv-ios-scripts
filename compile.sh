@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 LIBRARIES="libuchardet libfribidi libfreetype libharfbuzz libass ffmpeg libmpv libssl"
-IOS_SDK_VERSION="16.2"
-TVOS_SDK_VERSION="16.1"
+IOS_SDK_VERSION=$(xcrun -sdk iphoneos --show-sdk-version)
+TVOS_SDK_VERSION=$(xcrun -sdk appletvos --show-sdk-version)
 DEPLOYMENT_TARGET="11.0"
 
 export PKG_CONFIG_PATH
