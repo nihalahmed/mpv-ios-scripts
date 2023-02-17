@@ -1,5 +1,5 @@
---- src/mpv-0.35.0/bootstrap.py
-+++ src/mpv-0.35.0/bootstrap.py
+--- src/mpv-0.35.1/bootstrap.py
++++ src/mpv-0.35.1/bootstrap.py
 @@ -5,10 +5,10 @@
  import os, sys, stat, hashlib, subprocess
  from urllib.request import urlopen, URLError
@@ -13,8 +13,8 @@
 
  if os.path.exists("waf"):
      wafver = subprocess.check_output([sys.executable, './waf', '--version']).decode()
---- src/mpv-0.35.0/wscript
-+++ src/mpv-0.35.0/wscript
+--- src/mpv-0.35.1/wscript
++++ src/mpv-0.35.1/wscript
 @@ -245,6 +245,12 @@ iconv support use --disable-iconv.",
          'desc': 'w32/dos paths',
          'deps': 'os-win32 || os-cygwin',
@@ -28,8 +28,8 @@
      }, {
          'name': 'glob-posix',
          'desc': 'glob() POSIX support',
---- src/mpv-0.35.0/wscript_build.py
-+++ src/mpv-0.35.0/wscript_build.py
+--- src/mpv-0.35.1/wscript_build.py
++++ src/mpv-0.35.1/wscript_build.py
 @@ -209,7 +209,7 @@ def build(ctx):
      ])
  
