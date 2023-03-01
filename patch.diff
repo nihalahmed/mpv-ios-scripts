@@ -39,8 +39,8 @@
          ( "osdep/subprocess-win.c",              "win32-desktop" ),
          ( "osdep/subprocess-dummy.c" ),
      ])
---- src/ffmpeg-5.0/libavfilter/metal/utils.m
-+++ src/ffmpeg-5.0/libavfilter/metal/utils.m
+--- src/ffmpeg-6.0/libavfilter/metal/utils.m
++++ src/ffmpeg-6.0/libavfilter/metal/utils.m
 @@ -31,7 +31,7 @@ void ff_metal_compute_encoder_dispatch(id<MTLDevice> device,
      BOOL fallback = YES;
      // MAC_OS_X_VERSION_10_15 is only defined on SDKs new enough to include its functionality (including iOS, tvOS, etc)
