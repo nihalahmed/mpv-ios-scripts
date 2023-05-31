@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
 # Change to preferred versions
-MPV_VERSION="0.34.1"
-FFMPEG_VERSION="5.0"
+MPV_VERSION="0.35.1"
+FFMPEG_VERSION="6.0"
 LIBASS_VERSION="0.14.0"
 FREETYPE_VERSION="2.10.0"
 HARFBUZZ_VERSION="2.9.0"
 FRIBIDI_VERSION="1.0.8"
-UCHARDET_VERSION="0.0.6"
+UCHARDET_VERSION="0.0.8"
 
 MPV_URL="https://github.com/mpv-player/mpv/archive/v$MPV_VERSION.tar.gz"
 FFMPEG_URL="http://www.ffmpeg.org/releases/ffmpeg-$FFMPEG_VERSION.tar.bz2"
