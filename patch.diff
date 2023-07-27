@@ -1,20 +1,20 @@
---- src/mpv-0.34.1/bootstrap.py
-+++ src/mpv-0.34.1/bootstrap.py
+--- src/mpv-0.36.0/bootstrap.py
++++ src/mpv-0.36.0/bootstrap.py
 @@ -5,10 +5,10 @@
  import os, sys, stat, hashlib, subprocess
  from urllib.request import urlopen, URLError
- 
--WAFRELEASE = "waf-2.0.20"
+
+-WAFRELEASE = "waf-2.0.25"
 +WAFRELEASE = "waf-2.0.9"
  WAFURLS    = ["https://waf.io/" + WAFRELEASE,
-               "http://www.freehackers.org/~tnagy/release/" + WAFRELEASE]
--SHA256HASH = "bf971e98edc2414968a262c6aa6b88541a26c3cd248689c89f4c57370955ee7f"
+               "https://www.freehackers.org/~tnagy/release/" + WAFRELEASE]
+-SHA256HASH = "21199cd220ccf60434133e1fd2ab8c8e5217c3799199c82722543970dc8e38d5"
 +SHA256HASH = "2a8e0816f023995e557f79ea8940d322bec18f286917c8f9a6fa2dc3875dfa48"
- 
+
  if os.path.exists("waf"):
      wafver = subprocess.check_output([sys.executable, './waf', '--version']).decode()
---- src/mpv-0.34.1/wscript
-+++ src/mpv-0.34.1/wscript
+--- src/mpv-0.36.0/wscript
++++ src/mpv-0.36.0/wscript
 @@ -245,6 +245,12 @@ iconv support use --disable-iconv.",
          'desc': 'w32/dos paths',
          'deps': 'os-win32 || os-cygwin',
@@ -28,8 +28,8 @@
      }, {
          'name': 'glob-posix',
          'desc': 'glob() POSIX support',
---- src/mpv-0.34.1/wscript_build.py
-+++ src/mpv-0.34.1/wscript_build.py
+--- src/mpv-0.36.0/wscript_build.py
++++ src/mpv-0.36.0/wscript_build.py
 @@ -209,7 +209,7 @@ def build(ctx):
      ])
  
@@ -39,8 +39,8 @@
          ( "osdep/subprocess-win.c",              "win32-desktop" ),
          ( "osdep/subprocess-dummy.c" ),
      ])
---- src/ffmpeg-5.0/libavfilter/metal/utils.m
-+++ src/ffmpeg-5.0/libavfilter/metal/utils.m
+--- src/ffmpeg-6.0/libavfilter/metal/utils.m
++++ src/ffmpeg-6.0/libavfilter/metal/utils.m
 @@ -31,7 +31,7 @@ void ff_metal_compute_encoder_dispatch(id<MTLDevice> device,
      BOOL fallback = YES;
      // MAC_OS_X_VERSION_10_15 is only defined on SDKs new enough to include its functionality (including iOS, tvOS, etc)
